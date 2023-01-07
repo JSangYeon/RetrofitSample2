@@ -5,7 +5,7 @@ import jsy.test.retrofitsample.model.data.User
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface TestServiceImpl {
+interface TestRepository {
 
 //    @GET("/service/parking-lot/1/vehicle-locations")
 //    fun getVehicleLocation(): Single<Response<String>>

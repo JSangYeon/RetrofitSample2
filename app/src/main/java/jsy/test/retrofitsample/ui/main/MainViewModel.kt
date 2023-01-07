@@ -4,18 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.Flowable
-import io.reactivex.Scheduler
-import io.reactivex.annotations.SchedulerSupport.IO
-import io.reactivex.schedulers.Schedulers
 import jsy.test.retrofitsample.R
 import jsy.test.retrofitsample.model.repository.ResourcesProvider
+import jsy.test.retrofitsample.model.repository.TestRepositoryImpl
 import jsy.test.retrofitsample.util.network.RetrofitClient
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val resourcesProvider: ResourcesProvider
+    private val resourcesProvider: ResourcesProvider,
+    private val testRepositoryImpl: TestRepositoryImpl
 ) : ViewModel() {
 
     private val logTag = this.javaClass.simpleName
@@ -34,12 +32,11 @@ class MainViewModel @Inject constructor(
 //        Flowable.just("1")
 //            .subscribeOn(Schedulers.io()),)
 //        .getRetrofit().getVehicleLocation().subscribeOn(Schedulers.io()
-         retrofitClient.getRetrofit().getDefault().subscribeOn(Schedulers.io())
-             .subscribe({
+        testRepositoryImpl.getDefault().subscribe({
                  Log.d(logTag, "retrofit it :  ${it.body()}")
              },{
                  Log.d(logTag, "retrofit error : $it")
-             })
+             }).let {  }
 
 
     }

@@ -1,6 +1,6 @@
 package jsy.test.retrofitsample.util.network
 
-import jsy.test.retrofitsample.model.api.TestServiceImpl
+import jsy.test.retrofitsample.model.api.TestRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -20,10 +20,10 @@ object RetrofitClient {
     val NETWORK_STATUS_MOBILE = 2
 
 
-    fun getRetrofit(): TestServiceImpl {
+    fun getRetrofit(): TestRepository {
         val retrofit = retrofit(ApiConfig.API_URL_BASE)
 
-        return retrofit.create(TestServiceImpl::class.java)
+        return retrofit.create(TestRepository::class.java)
     }
 
 

@@ -19,16 +19,6 @@ object RetrofitClient {
     val NETWORK_STAUS_WIFI = 1
     val NETWORK_STATUS_MOBILE = 2
 
-
-    fun getRetrofit(): TestRepository {
-        val retrofit = retrofit(ApiConfig.API_URL_BASE)
-
-        return retrofit.create(TestRepository::class.java)
-    }
-
-
-
-
     fun retrofit(baseUrl: String = ApiConfig.API_URL_BASE): Retrofit {
         val client = getOkHttpClient().build()
         val retrofit = Retrofit.Builder()
@@ -43,7 +33,7 @@ object RetrofitClient {
 
 
 
-    fun getOkHttpClient() = OkHttpClient
+    private fun getOkHttpClient() = OkHttpClient
         .Builder().apply {
             connectTimeout(1, TimeUnit.MINUTES)
             readTimeout(30, TimeUnit.SECONDS)

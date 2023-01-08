@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">RetrofitSample</string>
+
+    <!--권한-->
+    <string name="permission_msg">앱을 사용하기 위해\n 저장소, 전화 접근 권한이 필요합니다.</string>
+    <string name="permission_ok">권한설정</string>
+    <string name="all_bar">|</string>
+    <string name="all_save">저장</string>
+    <string name="all_cancel">취소</string>
+
+
+    <string name="alert_ok">확인</string>
+    <string name="alert_cancel">취소</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="ok">네</string>
+    <string name="cancel">아니요</string>
+
+    <string name="app_close_hint">뒤로가기 버튼을 한번 더 누르시면 종료됩니다.</string>
+
+
     <string name="test_provider">test_provider</string>
 </resources>

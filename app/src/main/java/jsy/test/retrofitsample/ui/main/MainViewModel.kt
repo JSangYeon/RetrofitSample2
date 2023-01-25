@@ -1,21 +1,20 @@
 package jsy.test.retrofitsample.ui.main
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.Flowable
-import io.reactivex.Scheduler
-import io.reactivex.annotations.SchedulerSupport.IO
-import io.reactivex.schedulers.Schedulers
 import jsy.test.retrofitsample.R
-import jsy.test.retrofitsample.model.repository.ResourcesProvider
-import jsy.test.retrofitsample.util.network.RetrofitClient
+import jsy.test.retrofitsample.RetrofitSampleApplication
+import jsy.test.retrofitsample.model.data.User
+import jsy.test.retrofitsample.model.repository.JPHRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val resourcesProvider: ResourcesProvider
+    private val jphRepository: JPHRepository
+//    private val resourcesProvider: ResourcesProvider
 ) : ViewModel() {
 
     private val logTag = this.javaClass.simpleName
@@ -27,19 +26,32 @@ class MainViewModel @Inject constructor(
         _mainText.value = "1234"
     }
 
-    fun changeMainText(){
+    fun changeMainText() {
 
-        val retrofitClient = RetrofitClient
-        _mainText.value = resourcesProvider.getString(R.string.test_provider)
-//        Flowable.just("1")
-//            .subscribeOn(Schedulers.io()),)
-//        .getRetrofit().getVehicleLocation().subscribeOn(Schedulers.io()
-         retrofitClient.getRetrofit().getDefault().subscribeOn(Schedulers.io())
-             .subscribe({
-                 Log.d(logTag, "retrofit it :  ${it.body()}")
-             },{
-                 Log.d(logTag, "retrofit error : $it")
-             })
+        _mainText.value =
+            RetrofitSampleApplication.instance.applicationContext.getString(R.string.test_provider)
+
+
+//         jphRepository.getDefault().subscribe({
+//                 Log.d(logTag, "retrofit it :  ${it.body()}")
+//             },{
+//                 Log.d(logTag, "retrofit error : $it")
+//             }).let {
+//
+//         }
+
+        val tempUser = User(
+            userId = 19941117,
+            id = 55555,
+            title = "jsy",
+            completed = true
+        )
+        jphRepository.postJson(tempUser).subscribe({
+            Log.d(logTag, "jphRepository postJson complete code : ${it.code()}")
+            Log.d(logTag, "jphRepository postJson complete body : ${it.body()}")
+        }, {
+            Log.d(logTag, "jphRepository postJson error : $it")
+        }).let { }
 
 
     }
